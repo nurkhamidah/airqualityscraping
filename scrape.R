@@ -3,7 +3,6 @@ message("Loading the libraries")
 library(rvest)
 library(dplyr)
 library(mongolite)
-library(lubridate)
 
 #------------------------------------------------------
 message("Loading the URL(s)")
@@ -55,8 +54,8 @@ Sys.setenv(TZ = "Asia/Bangkok")
 message("Store data to database")
 data <- list(
   id = con$count()+1,
-  date = today(tzone = "Asia/Jakarta"),
-  time = now(tzone = "Asia/Jakarta"),
+  date = as.character(Sys.Date()),
+  time = as.character(Sys.time()),
   aqi_value = data.frame(score = aqi_score,
                          unit = aqi_unit,
                          desc = aqi_desc),
