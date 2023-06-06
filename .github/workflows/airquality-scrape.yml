@@ -29,7 +29,5 @@ jobs:
         run: Rscript -e 'install.packages("rvest", dependencies = TRUE)'  
       - name: Install dplyr package
         run: Rscript -e 'install.packages("dplyr", dependencies = TRUE)'  
-      - name: Install lubridate package
-        run: Rscript -e 'install.packages("lubridate", dependencies = TRUE)'  
       - name: Scrape data 
         run: Rscript scrape.R
