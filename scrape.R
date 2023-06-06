@@ -2,6 +2,7 @@
 message("Loading the libraries")
 library(rvest)
 library(dplyr)
+library(mongolite)
 
 #------------------------------------------------------
 message("Loading the URL(s)")
@@ -35,3 +36,12 @@ aqi_rank_local <- (html %>% html_elements(".ranking__table") %>% html_table())[[
 #------------------------------------------------------
 message("Get additional informations")
 info <- html %>% html_element(xpath = '//*[@id="content-wrapper"]/app-routes-resolver/div/app-city/div[2]/div[1]/app-weather/div/div[2]/table/tbody') %>% html_table()
+
+db <- Sys.getenv("ATLAS_DB")
+url <- Sys.getenv("ATLAS_URL")
+collection <- Sys.getenv("ATLAS_COLLECTION")
+con <- mongo(collection = collection,
+             db = db,
+             url = url)
+
+
