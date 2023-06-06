@@ -3,6 +3,7 @@ message("Loading the libraries")
 library(rvest)
 library(dplyr)
 library(mongolite)
+library(lubridate)
 
 #------------------------------------------------------
 message("Loading the URL(s)")
@@ -50,8 +51,8 @@ con <- mongo(collection = collection,
 message("Store data to database")
 data <- list(
   id = con$count()+1,
-  date = Sys.Date(),
-  time = Sys.time(),
+  date = today(tzone = "Asia/Jakarta"),
+  time = now(tzone = "Asia/Jakarta"),
   aqi_value = data.frame(score = aqi_score,
                          unit = aqi_unit,
                          desc = aqi_desc),
@@ -62,10 +63,10 @@ data <- list(
   aqi_local_rank = aqi_rank_local,
   aqi_indo_rank = aqi_rank_indo,
   weather_info = data.frame(weather = info$X2[1],
-                            temperature = info$X1[2],
-                            humidity = info$X1[3],
-                            wind = info$X1[4],
-                            pressure = info$X1[5])
+                            temperature = info$X2[2],
+                            humidity = info$X2[3],
+                            wind = info$X2[4],
+                            pressure = info$X2[5])
 )
 con$insert(data)
 
