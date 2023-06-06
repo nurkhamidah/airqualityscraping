@@ -48,6 +48,10 @@ con <- mongo(collection = collection,
              url = url)
 
 #------------------------------------------------------
+message("Set timezone")
+Sys.setenv(TZ = "Asia/Bangkok")
+
+#------------------------------------------------------
 message("Store data to database")
 data <- list(
   id = con$count()+1,
