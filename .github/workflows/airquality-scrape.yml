@@ -2,8 +2,8 @@ name: Scrape Bogor Air Quality Profile
 
 on:
   schedule:
-    # - cron: '0 4,12,20 * * *'  # runs at 04:00, 12:00, 20:00 local time
-    - cron: '*/10 * * * *'  # runs every 10 minutes
+    - cron: '15 0,6,12,18 * * *'  # runs at 00:15, 06:15, 12:15, 18:15 local time
+    # - cron: '*/10 * * * *'  # runs every 10 minutes
 
 permissions:
   contents: read
