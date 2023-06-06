@@ -4,10 +4,15 @@ on:
   schedule:
     - cron: '*/5 * * * *'  # every hour
 
+permissions:
+  contents: read
 
 jobs:
   airquality-scrape:
     runs-on: macos-latest
+    strategy:
+      matrix:
+        r-version: ['3.6.3', '4.1.1']
     env:
       ATLAS_URL: ${{ secrets.ATLAS_URL }}
       ATLAS_COLLECTION: ${{ secrets.ATLAS_COLLECTION }}
