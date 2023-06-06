@@ -2,7 +2,7 @@ name: Scrape Bogor Air Quality Profile
 
 on:
   schedule:
-    - cron: '15 * * * *'  # every hour
+    - cron: '*/5 * * * *'  # every hour
 
 
 jobs:
