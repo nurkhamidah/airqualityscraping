@@ -2,15 +2,14 @@
 import streamlit as st
 import pymongo as pm
 import pandas as pd
-import os
 
 # ------------------------ MONGO DB ATLAS ------------------------
 
 # Define database connection
 
-con = pm.MongoClient(os.getenv("ATLAS_URL"))
-db = con[os.getenv("ATLAS_DB")]
-collection = db[os.getenv("ATLAS_COLLECTION")]
+con = pm.MongoClient(st.secrets("ATLAS_URL"))
+db = con[st.secrets("ATLAS_DB")]
+collection = db[st.secrets("ATLAS_COLLECTION")]
 
 # Test get all data
 vec_result = []
