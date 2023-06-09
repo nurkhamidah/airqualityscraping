@@ -1,5 +1,6 @@
-import pymongo as pm
+# Import modules
 import streamlit as st
+import pymongo as pm
 import pandas as pd
 import os
 
