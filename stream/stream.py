@@ -1,5 +1,6 @@
 import pymongo as pm
 import streamlit as st
+import pandas as pd
 import os
 
 # ------------------------ MONGO DB ATLAS ------------------------
@@ -64,7 +65,33 @@ with b1:
   if period == "Semua aja":
     period2 = "Semua"
 with b2:
-  if period2 == "2023-06-09":
-    "Test aja ini, maasih dipusingin"
-  if period2 == "Siang 12:00 WIB":
-    "Ya ini juga sama pusingnya"
+  if period == "Tanggal":
+    d = []
+    for i in range(0, len(vec_result)):
+        if vec_result[i]["date"][0] == period2:
+            d.append(vec_result[i]["aqi_value"][0])
+    st.table(pd.DataFrame(d, columns=["score", "unit", "desc"]))
+  if period == "Waktu":
+    id = abs(waktu.index(period2) -2)
+    t = []
+    dat = []
+    for i in range(0, len(vec_result)):
+        if i % 4 == id:
+            t.append(vec_result[i]["aqi_value"][0])
+            dat.append(vec_result[i]["date"][0])
+            
+    t1 = pd.DataFrame(t, columns=["score", "unit", "desc"])
+    dat1 = pd.DataFrame(dat, columns=["date"])
+    st.table(pd.concat([dat1, t1], axis=1))
+  if period == "Semua aja":
+    s = []
+    dat = []
+    tim = []
+    for i in range(0, len(vec_result)):
+      s.append(vec_result[i]["aqi_value"][0])
+      dat.append(vec_result[i]["date"][0])
+      tim.append(vec_result[i]["time"][0])
+    s1 = pd.DataFrame(s, columns=["score", "unit", "desc"])
+    dat1 = pd.DataFrame(dat, columns=["date"])
+    tim1 = pd.DataFrame(tim, columns=["time"])
+    st.table(pd.concat([dat1, tim1, s1], axis=1))
